@@ -1,0 +1,16 @@
+
+.first__part {}
+
+.second__part {
+    background-color: #0A0339;
+    height: 100vh;
+    border-radius: 8px;
+}
+
+.second__part__resize_ill {
+    height: calc(100vh - 44%);
+}
+
+.second__part__resize_txt {
+  
+}
