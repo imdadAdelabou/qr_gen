@@ -1,0 +1,10 @@
+
+.custom__btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #4E46B2;
+    border-radius: 8px;
+    font-weight: 700;
+}
