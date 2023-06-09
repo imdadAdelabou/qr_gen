@@ -4,9 +4,11 @@ export const APP_MESSAGE = {
   dummyMail: "mail@abc.com",
   loginLabel: "Login",
   registerLabel: "Register",
-  usernameLabel: "Username",
+  usernameLabel: "username",
   notAnAccount: "Dont't have an account? Sign-Up",
   alreadyHaveAnAccount: "Already have an account? Sign-In",
+  oopsLabel: "Oops!",
+  notFoundLabel: "404-Not found",
 };
 
 export const REGISTER_PATH = "/register";

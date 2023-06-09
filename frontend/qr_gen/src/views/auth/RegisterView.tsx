@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function RegisterView() {
   const navigate = useNavigate();
 
-  const naviagteToLogin = () => navigate(LOGIN_PATH);
+  const navigateToLogin = () => navigate(LOGIN_PATH);
 
   return (
     <div className="container-fluid">
@@ -37,10 +37,10 @@ function RegisterView() {
               <CustomBtn
                 content={APP_MESSAGE.registerLabel}
                 isActive={true}
-                action={naviagteToLogin}
+                action={() => {}}
               ></CustomBtn>
             </div>
-            <h3 className="new_user_link">
+            <h3 className="new_user_link" onClick={navigateToLogin}>
               {APP_MESSAGE.alreadyHaveAnAccount}
             </h3>
           </form>

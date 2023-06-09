@@ -1,0 +1,10 @@
+
+.bg {
+    background-color: #0A0339;
+    color: white;
+    height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
