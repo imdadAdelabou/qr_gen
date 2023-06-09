@@ -36,6 +36,7 @@ function RegisterView() {
               <div className="spacer"></div>
               <CustomBtn
                 content={APP_MESSAGE.registerLabel}
+                type="submit"
                 isActive={true}
                 action={() => {}}
               ></CustomBtn>

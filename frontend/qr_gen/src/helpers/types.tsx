@@ -1,11 +1,14 @@
-
 export interface InputType {
-    hintText: string;
-    typeInput: "text" | "password" | "email"
+  props: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >;
+  haveError: boolean;
 }
 
 export interface BtnType {
-    content: string;
-    isActive: boolean;
-    action: () => void;
+  content: string;
+  isActive: boolean;
+  action?: () => void;
+  type?: "button" | "submit";
 }
