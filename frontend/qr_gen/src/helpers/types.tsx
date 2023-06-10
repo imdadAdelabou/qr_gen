@@ -11,4 +11,6 @@ export interface BtnType {
   isActive: boolean;
   action?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
+  isLoading?: boolean;
 }

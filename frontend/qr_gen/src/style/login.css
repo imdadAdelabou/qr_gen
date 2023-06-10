@@ -57,3 +57,8 @@
 .new_user_link:hover {
     color: #4E46B2;
 }
+
+
+.error__text {
+    color: red;
+}
