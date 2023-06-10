@@ -4,11 +4,34 @@ import { APP_MESSAGE, LOGIN_PATH } from "../../helpers/constants";
 import CustomInput from "../../components/CustomInput";
 import CustomBtn from "../../components/CustomBtn";
 import { useNavigate } from "react-router-dom";
+import { FormEvent } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function RegisterView() {
   const navigate = useNavigate();
 
   const navigateToLogin = () => navigate(LOGIN_PATH);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    formik.handleSubmit(e);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: () => {},
+    validationSchema: Yup.object({
+      username: Yup.string().min(3).required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().min(6).required(),
+    }),
+  });
 
   return (
     <div className="container-fluid">
@@ -23,22 +46,44 @@ function RegisterView() {
           </h1>
         </div>
         <div className="col centerC">
-          <form>
+          <form method="POST" onSubmit={onSubmit}>
             <div className="body__form">
               <CustomInput
-                hintText={APP_MESSAGE.usernameLabel}
-                typeInput="text"
+                props={{
+                  placeholder: APP_MESSAGE.usernameLabel,
+                  type: "text",
+                  id: "username",
+                  ...formik.getFieldProps("username"),
+                }}
+                haveError={
+                  formik.touched && formik.errors.username ? true : false
+                }
               />
               <div className="spacer"></div>
-              <CustomInput hintText={APP_MESSAGE.dummyMail} typeInput="email" />
+              <CustomInput
+                props={{
+                  placeholder: APP_MESSAGE.dummyMail,
+                  type: "email",
+                  ...formik.getFieldProps("email"),
+                }}
+                haveError={formik.touched && formik.errors.email ? true : false}
+              />
               <div className="spacer"></div>
-              <CustomInput hintText="*****" typeInput="password" />
+              <CustomInput
+                props={{
+                  placeholder: "*****",
+                  type: "password",
+                  ...formik.getFieldProps("password"),
+                }}
+                haveError={
+                  formik.touched && formik.errors.password ? true : false
+                }
+              />
               <div className="spacer"></div>
               <CustomBtn
                 content={APP_MESSAGE.registerLabel}
                 type="submit"
                 isActive={true}
-                action={() => {}}
               ></CustomBtn>
             </div>
             <h3 className="new_user_link" onClick={navigateToLogin}>

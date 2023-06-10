@@ -13,12 +13,8 @@ function LoginView() {
 
   const navToRegister = () => navigate(REGISTER_PATH);
 
-  function onSubmit(e: FormEvent) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("Okay");
-    console.log({ ...formik.getFieldProps("email") });
-    console.log(formik.errors.email);
-    console.log(formik.errors.password);
     formik.handleSubmit(e);
   }
 
@@ -59,7 +55,7 @@ function LoginView() {
                 }}
                 haveError={formik.touched && formik.errors.email ? true : false}
               />
-
+              <div className="error__text">{formik.errors.email}</div>
               <div className="spacer"></div>
               <CustomInput
                 props={{
@@ -72,10 +68,17 @@ function LoginView() {
                   formik.touched && formik.errors.password ? true : false
                 }
               />
+              <div className="error__text">{formik.errors.password}</div>
               <div className="spacer"></div>
               <CustomBtn
                 content={APP_MESSAGE.loginLabel}
-                isActive={true}
+                isActive={
+                  formik.errors.email || formik.errors.password ? false : true
+                }
+                disabled={
+                  formik.errors.email || formik.errors.password ? true : false
+                }
+                isLoading={false}
                 type="submit"
               ></CustomBtn>
             </div>
