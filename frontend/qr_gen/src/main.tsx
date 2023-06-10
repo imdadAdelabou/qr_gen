@@ -9,6 +9,7 @@ import RegisterView from "./views/auth/RegisterView.tsx";
 import "./index.css";
 import "./App.css";
 import ErrorPage from "./components/ErrorPage.tsx";
+import VerificationEmail from "./views/auth/VerificationEmail.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterView />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/verify-email",
+    element: <VerificationEmail />,
     errorElement: <ErrorPage />,
   },
 ]);

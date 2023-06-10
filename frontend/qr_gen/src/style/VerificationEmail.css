@@ -1,0 +1,15 @@
+
+.verify__email {
+    background-color: #0A0339;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.text__style {
+    width: 20rem;
+    font-size: 1.3rem;
+}

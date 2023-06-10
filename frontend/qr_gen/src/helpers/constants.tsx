@@ -9,6 +9,7 @@ export const APP_MESSAGE = {
   alreadyHaveAnAccount: "Already have an account? Sign-In",
   oopsLabel: "Oops!",
   notFoundLabel: "404-Not found",
+  verifyEmail: "Please give us a moment to verify your email address 😇",
 };
 
 export const REGISTER_PATH = "/register";
