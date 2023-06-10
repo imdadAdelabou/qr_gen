@@ -59,6 +59,7 @@ function RegisterView() {
                   formik.touched && formik.errors.username ? true : false
                 }
               />
+              <div className="error__text">{formik.errors.username}</div>
               <div className="spacer"></div>
               <CustomInput
                 props={{
@@ -68,6 +69,7 @@ function RegisterView() {
                 }}
                 haveError={formik.touched && formik.errors.email ? true : false}
               />
+              <div className="error__text">{formik.errors.email}</div>
               <div className="spacer"></div>
               <CustomInput
                 props={{
@@ -79,11 +81,25 @@ function RegisterView() {
                   formik.touched && formik.errors.password ? true : false
                 }
               />
+              <div className="error__text">{formik.errors.password}</div>
               <div className="spacer"></div>
               <CustomBtn
                 content={APP_MESSAGE.registerLabel}
                 type="submit"
-                isActive={true}
+                isActive={
+                  formik.errors.email ||
+                  formik.errors.password ||
+                  formik.errors.username
+                    ? false
+                    : true
+                }
+                disabled={
+                  formik.errors.email ||
+                  formik.errors.password ||
+                  formik.errors.username
+                    ? true
+                    : false
+                }
               ></CustomBtn>
             </div>
             <h3 className="new_user_link" onClick={navigateToLogin}>
