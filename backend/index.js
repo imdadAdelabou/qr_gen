@@ -1,31 +1,13 @@
-const { loginSchema, registerSchema } = require("./schemas/auth.js");
-const { loginHandler, registerHandler } = require("./controllers/auth.js");
-
+require("dotenv").config();
 const fastify = require("fastify")({ logger: true });
-
-fastify.get("/", async (request, reply) => {
-  return reply.status(200).send({ message: "Welcome to the qr_gen backend" });
-});
-
-fastify.route({
-  method: "POST",
-  url: "/login",
-  schema: loginSchema,
-  handler: loginHandler,
-});
-
-fastify.route({
-  method: "POST",
-  url: "/register",
-  schema: registerSchema,
-  handler: registerHandler,
-});
+fastify.register(require("./plugins/dbconnector"));
+fastify.register(require("./plugins/routes"));
 
 const start = async () => {
   try {
     await fastify.listen({ port: 3000 });
   } catch (e) {
-    fastify.log.error(err);
+    fastify.log.error(e);
     process.exit(1);
   }
 };

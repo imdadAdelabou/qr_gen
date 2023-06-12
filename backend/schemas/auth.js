@@ -34,6 +34,46 @@ const registerSchema = {
     },
     required: ["username", "email", "password"],
   },
+  response: {
+    200: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+    409: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+  },
 };
 
-module.exports = { loginSchema, registerSchema };
+const verifySchema = {
+  querystring: {
+    type: "object",
+    properties: {
+      token: {
+        type: "string",
+      },
+    },
+    required: ["token"],
+  },
+  response: {
+    200: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+    500: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+  },
+};
+
+module.exports = { loginSchema, registerSchema, verifySchema };
