@@ -13,6 +13,40 @@ const loginSchema = {
     },
     required: ["email", "password"],
   },
+  response: {
+    200: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+        user: {
+          id: { type: "number" },
+          username: { type: "string" },
+          email: { type: "string" },
+          token: { type: "string" },
+        },
+      },
+    },
+    400: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+        errCode: { type: "string" },
+      },
+    },
+    404: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+
+    500: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+  },
 };
 
 const registerSchema = {
