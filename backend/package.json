@@ -1,5 +1,14 @@
 {
   "dependencies": {
-    "fastify": "^4.18.0"
+    "@sendgrid/mail": "^7.7.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.1.4",
+    "fastify": "^4.18.0",
+    "fastify-mariadb": "^2.0.0",
+    "fastify-plugin": "^4.5.0",
+    "fastify-sequelizejs": "^1.6.0",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.3.4",
+    "sequelize-fastify": "^2.0.0"
   }
 }
