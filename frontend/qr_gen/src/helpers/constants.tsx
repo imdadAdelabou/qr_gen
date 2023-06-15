@@ -10,7 +10,11 @@ export const APP_MESSAGE = {
   oopsLabel: "Oops!",
   notFoundLabel: "404-Not found",
   verifyEmail: "Please give us a moment to verify your email address 😇",
+  userDontExist: "Oops! This user don't exist",
+  wrongPassword: "Sorry, your password don't match. Try again!",
+  successLabel: "Succes",
 };
 
 export const REGISTER_PATH = "/register";
 export const LOGIN_PATH = "/login";
+export const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;

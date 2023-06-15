@@ -3,12 +3,16 @@ import qrCodeIllus1 from "../../assets/qrCode_ill1.svg";
 import { APP_MESSAGE, REGISTER_PATH } from "../../helpers/constants";
 import CustomInput from "../../components/CustomInput";
 import CustomBtn from "../../components/CustomBtn";
-import { useNavigate } from "react-router-dom";
-import { FormEvent } from "react";
+import { redirect, useNavigate } from "react-router-dom";
+import React, { FormEvent } from "react";
 import { useFormik } from "formik";
+import useSubmit from "../../hooks/useSubmit";
 import * as Yup from "yup";
+import openToast from "../../helpers/functions";
+import { LoginType } from "../../helpers/types";
 
 function LoginView() {
+  const { isLoading, response, submit } = useSubmit();
   const navigate = useNavigate();
 
   const navToRegister = () => navigate(REGISTER_PATH);
@@ -18,13 +22,24 @@ function LoginView() {
     formik.handleSubmit(e);
   }
 
+  function login(token: string) {
+    console.log(token, "test");
+    localStorage.setItem("userToken", token);
+
+    redirect("/");
+    return;
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: () => {
-      alert("Top");
+    onSubmit: async (values) => {
+      await submit("/api/login", values, (data) =>
+        login((data as LoginType).user.token)
+      );
+      if (response) openToast(response.message, response.type);
     },
     validationSchema: Yup.object({
       email: Yup.string().email().required(),
@@ -73,12 +88,16 @@ function LoginView() {
               <CustomBtn
                 content={APP_MESSAGE.loginLabel}
                 isActive={
-                  formik.errors.email || formik.errors.password ? false : true
+                  formik.errors.email || formik.errors.password || isLoading
+                    ? false
+                    : true
                 }
                 disabled={
-                  formik.errors.email || formik.errors.password ? true : false
+                  formik.errors.email || formik.errors.password || isLoading
+                    ? true
+                    : false
                 }
-                isLoading={false}
+                isLoading={isLoading}
                 type="submit"
               ></CustomBtn>
             </div>
