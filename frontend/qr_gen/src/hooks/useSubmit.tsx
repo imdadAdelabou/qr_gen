@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { APP_MESSAGE, BASE_API_URL } from "../helpers/constants";
-import { LoginErrorType, RResponseType, TypeResponse } from "../helpers/types";
+import { LoginErrorType, TypeResponse } from "../helpers/types";
+import openToast from "../helpers/functions";
 
 function useSubmit() {
   const [isLoading, setLoading] = useState(false);
-  const [response, setResponse] = useState<RResponseType | null>(null);
 
   const submit = async (
     url: string,
@@ -20,35 +20,32 @@ function useSubmit() {
       if (result.status == 200 || result.status == 201) {
         action(result.data);
       }
-      setResponse({
-        type: TypeResponse.SUCCESS,
-        message: APP_MESSAGE.successLabel,
-      });
+
+      openToast(APP_MESSAGE.successLabel, TypeResponse.SUCCESS);
     } catch (e) {
       const error = e as AxiosError;
 
       if (error.response?.status == 404) {
-        setResponse({
-          message: APP_MESSAGE.userDontExist,
-          type: TypeResponse.ERROR,
-        });
+        openToast(APP_MESSAGE.userDontExist, TypeResponse.ERROR);
       }
+
       if (
         error.response &&
         error.response?.status == 400 &&
         (error.response.data as LoginErrorType).errCode == "wrong-password"
       ) {
-        setResponse({
-          type: TypeResponse.ERROR,
-          message: APP_MESSAGE.wrongPassword,
-        });
+        openToast(APP_MESSAGE.wrongPassword, TypeResponse.ERROR);
+      }
+
+      if (error.response && error.response.status == 500) {
+        openToast(APP_MESSAGE.internalServorError, TypeResponse.ERROR);
       }
     } finally {
       setLoading(false);
     }
   };
 
-  return { isLoading, response, submit };
+  return { isLoading, submit };
 }
 
 export default useSubmit;

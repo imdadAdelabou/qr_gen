@@ -1,0 +1,25 @@
+
+.qr__card {
+    width: 20vw;
+    height: 20vh;  
+}
+
+.qr__img {
+    width: 20vw;
+    height: 30vh; 
+    background-size: cover;
+}
+
+.link {
+    font-size: 0.9rem;
+    color: grey;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+h3 {
+    text-align: center;
+}

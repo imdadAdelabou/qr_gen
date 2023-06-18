@@ -13,8 +13,17 @@ export const APP_MESSAGE = {
   userDontExist: "Oops! This user don't exist",
   wrongPassword: "Sorry, your password don't match. Try again!",
   successLabel: "Succes",
+  contactLabel: "Contact",
+  allQrCodeLabel: "All Qr code",
+  downloadLabel: "Download",
+  enterYourLink: "Enter your link here",
+  generateLabel: "Generate",
+  internalServorError: "An error occur",
+  linkLabel: "Link",
+  contactCardQr: "Contact Card",
 };
 
 export const REGISTER_PATH = "/register";
 export const LOGIN_PATH = "/login";
+export const PATH_QR_LINK = "/api/generate/qr/link";
 export const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;

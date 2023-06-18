@@ -10,6 +10,7 @@
     "fastify-sequelizejs": "^1.6.0",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.3.4",
+    "qrcode": "^1.5.3",
     "sequelize-fastify": "^2.0.0"
   }
 }

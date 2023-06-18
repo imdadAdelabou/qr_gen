@@ -25,6 +25,11 @@ export enum TypeResponse {
   ERROR,
 }
 
+export enum TypeQr {
+  Link = "lien",
+  ContactCard = "Contact Card",
+}
+
 export interface RResponseType {
   type: TypeResponse;
   data?: unknown;
@@ -42,13 +47,31 @@ export interface LoginType {
 }
 
 export interface UserType {
-  id: number;
-  username: string;
-  email: string;
-  token: string;
+  id?: number | null;
+  username?: string | null;
+  email?: string | null;
+  token?: string | null;
 }
 
 export interface UserContextType {
-  user?: UserType;
+  user?: UserType | null;
   updateUser: (data: UserType) => void;
+}
+
+export interface ItemMenuType {
+  element: JSX.Element;
+  icon: string;
+  label: string;
+  route: string;
+}
+
+export interface QrType {
+  url: string;
+  date: Date;
+  typeQr: string;
+}
+
+export interface GenQrResponseType {
+  data: QrType;
+  message: string;
 }

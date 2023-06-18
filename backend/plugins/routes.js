@@ -2,12 +2,15 @@ const {
   loginSchema,
   registerSchema,
   verifySchema,
+  generateQrSchema,
 } = require("../schemas/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sampleTemplate } = require("../template/sendVerifyCode");
 const sendMail = require("./sendgrid");
 const verifyToken = require("../controllers/verifyToken");
+const fastify = require("fastify");
+const qr = require("qrcode");
 
 function routes(fastify, opt, done) {
   const DB = fastify.Sequelize["qrGen"];
@@ -112,6 +115,24 @@ function routes(fastify, opt, done) {
         return reply.status(200).send({ message: "Account succesful verify" });
       } catch (e) {
         return reply.status(500).send({ message: "Internal Server Error" });
+      }
+    },
+  });
+
+  fastify.route({
+    method: "POST",
+    url: "/api/generate/qr/link",
+    schema: generateQrSchema,
+    handler: async (request, reply) => {
+      try {
+        const url = await qr.toDataURL(request.body.link);
+
+        return reply.status(200).send({
+          message: "success",
+          data: { url: url, typeQr: "link", date: Date() },
+        });
+      } catch (e) {
+        return reply.status(500).send({ message: "Internal Error" });
       }
     },
   });

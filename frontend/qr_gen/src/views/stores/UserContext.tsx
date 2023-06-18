@@ -1,10 +1,19 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { UserContextType, UserType } from "../../helpers/types";
+import React from "react";
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+export const UserContext = createContext<UserContextType | null>(null);
 
-export const UserProvider = (children: JSX.Element) => {
-  const [user, setUser] = useState<UserType | undefined>(undefined);
+export const UserProvider = ({
+  children,
+}: {
+  children: React.ReactElement;
+}) => {
+  const [user, setUser] = useState<UserType | null>({
+    token: localStorage.getItem("userToken"),
+  });
+
+  console.log(user?.token, "from context");
 
   return (
     <UserContext.Provider
@@ -19,4 +28,4 @@ export const UserProvider = (children: JSX.Element) => {
   );
 };
 
-export const useUser = () => useContext(UserContext);
+export default UserProvider;

@@ -3,16 +3,20 @@ import qrCodeIllus1 from "../../assets/qrCode_ill1.svg";
 import { APP_MESSAGE, REGISTER_PATH } from "../../helpers/constants";
 import CustomInput from "../../components/CustomInput";
 import CustomBtn from "../../components/CustomBtn";
-import { redirect, useNavigate } from "react-router-dom";
-import React, { FormEvent } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { FormEvent } from "react";
 import { useFormik } from "formik";
 import useSubmit from "../../hooks/useSubmit";
 import * as Yup from "yup";
-import openToast from "../../helpers/functions";
-import { LoginType } from "../../helpers/types";
+
+import { LoginType, UserContextType, UserType } from "../../helpers/types";
+import * as React from "react";
+
+import { UserContext } from "../stores/UserContext";
 
 function LoginView() {
-  const { isLoading, response, submit } = useSubmit();
+  const { user, updateUser } = React.useContext(UserContext) as UserContextType;
+  const { isLoading, submit } = useSubmit();
   const navigate = useNavigate();
 
   const navToRegister = () => navigate(REGISTER_PATH);
@@ -22,11 +26,13 @@ function LoginView() {
     formik.handleSubmit(e);
   }
 
-  function login(token: string) {
-    console.log(token, "test");
-    localStorage.setItem("userToken", token);
+  function login(user: UserType) {
+    localStorage.setItem("userToken", user.token as string);
+    updateUser(user);
+    console.log(user.token, "Token in state");
 
-    redirect("/");
+    navigate("/");
+
     return;
   }
 
@@ -37,9 +43,8 @@ function LoginView() {
     },
     onSubmit: async (values) => {
       await submit("/api/login", values, (data) =>
-        login((data as LoginType).user.token)
+        login((data as LoginType).user)
       );
-      if (response) openToast(response.message, response.type);
     },
     validationSchema: Yup.object({
       email: Yup.string().email().required(),
@@ -47,7 +52,7 @@ function LoginView() {
     }),
   });
 
-  return (
+  return !user?.token ? (
     <div className="container-fluid">
       <div className="row">
         <div className="col-7 second__part">
@@ -108,6 +113,8 @@ function LoginView() {
         </div>
       </div>
     </div>
+  ) : (
+    <Navigate replace to="/" />
   );
 }
 

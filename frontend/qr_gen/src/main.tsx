@@ -11,18 +11,29 @@ import ErrorPage from "./components/ErrorPage.tsx";
 import VerificationEmail from "./views/auth/VerificationEmail.tsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import RequiredAuth from "./helpers/requiredAuth.tsx";
-import IsAlreadyConnected from "./helpers/isAlreadyConnected.tsx";
+import { UserProvider } from "./views/stores/UserContext.tsx";
+import Link from "./views/home/generate/Link.tsx";
+import ContactCard from "./views/home/generate/ContactCard.tsx";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
-    element: RequiredAuth(<HomeView />),
+    element: <HomeView />,
+    children: [
+      {
+        path: "generate/link",
+        element: <Link />,
+      },
+      {
+        path: "generate/contact-card",
+        element: <ContactCard />,
+      },
+    ],
     errorElement: <ErrorPage />,
   },
   {
     path: "/login",
-    element: IsAlreadyConnected(<App />),
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
@@ -39,7 +50,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer />
+    <UserProvider>
+      <>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </>
+    </UserProvider>
   </React.StrictMode>
 );
