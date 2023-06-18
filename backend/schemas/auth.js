@@ -110,4 +110,38 @@ const verifySchema = {
   },
 };
 
-module.exports = { loginSchema, registerSchema, verifySchema };
+const generateQrSchema = {
+  body: {
+    type: "object",
+    properties: {
+      link: { type: "string", minLength: 1 },
+    },
+    required: ["link"],
+  },
+  response: {
+    200: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+        data: {
+          url: { type: "string" },
+          typeQr: { type: "string" },
+          date: { type: "date" },
+        },
+      },
+    },
+    500: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+      },
+    },
+  },
+};
+
+module.exports = {
+  loginSchema,
+  registerSchema,
+  verifySchema,
+  generateQrSchema,
+};

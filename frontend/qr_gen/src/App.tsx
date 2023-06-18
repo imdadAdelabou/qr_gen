@@ -1,14 +1,7 @@
-
-import LoginView from './views/auth/LoginView'
-
+import LoginView from "./views/auth/LoginView";
 
 function App() {
-  
-  return (
-    <>
-    <LoginView />
-    </>
-  )
+  return <LoginView />;
 }
 
-export default App
+export default App;

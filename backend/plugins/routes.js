@@ -2,12 +2,15 @@ const {
   loginSchema,
   registerSchema,
   verifySchema,
+  generateQrSchema,
 } = require("../schemas/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sampleTemplate } = require("../template/sendVerifyCode");
 const sendMail = require("./sendgrid");
 const verifyToken = require("../controllers/verifyToken");
+const fastify = require("fastify");
+const qr = require("qrcode");
 
 function routes(fastify, opt, done) {
   const DB = fastify.Sequelize["qrGen"];
@@ -25,7 +28,7 @@ function routes(fastify, opt, done) {
 
   fastify.route({
     method: "POST",
-    url: "/login",
+    url: "/api/login",
     schema: loginSchema,
     handler: async (request, reply) => {
       const { email, password } = request.body;
@@ -47,17 +50,15 @@ function routes(fastify, opt, done) {
           { expiresIn: "2h" }
         );
 
-        return reply
-          .status(200)
-          .send({
-            message: "User correctly login",
-            user: {
-              id: user.id,
-              username: user.username,
-              email: user.email,
-              token: token,
-            },
-          });
+        return reply.status(200).send({
+          message: "User correctly login",
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            token: token,
+          },
+        });
       } catch (e) {
         return reply.status(500).send({ message: "Internal server error" });
       }
@@ -66,7 +67,7 @@ function routes(fastify, opt, done) {
 
   fastify.route({
     method: "POST",
-    url: "/register",
+    url: "/api/register",
     schema: registerSchema,
     handler: async (request, reply) => {
       const { username, email, password } = request.body;
@@ -103,7 +104,7 @@ function routes(fastify, opt, done) {
 
   fastify.route({
     method: "GET",
-    url: "/confirm-email",
+    url: "/api/confirm-email",
     schema: verifySchema,
     preHandler: verifyToken,
     handler: async (request, reply) => {
@@ -114,6 +115,24 @@ function routes(fastify, opt, done) {
         return reply.status(200).send({ message: "Account succesful verify" });
       } catch (e) {
         return reply.status(500).send({ message: "Internal Server Error" });
+      }
+    },
+  });
+
+  fastify.route({
+    method: "POST",
+    url: "/api/generate/qr/link",
+    schema: generateQrSchema,
+    handler: async (request, reply) => {
+      try {
+        const url = await qr.toDataURL(request.body.link);
+
+        return reply.status(200).send({
+          message: "success",
+          data: { url: url, typeQr: "link", date: Date() },
+        });
+      } catch (e) {
+        return reply.status(500).send({ message: "Internal Error" });
       }
     },
   });
