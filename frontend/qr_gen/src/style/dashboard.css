@@ -9,12 +9,15 @@
     width: 20%;
     height: 100%;
     background-color: #4E46B2;
+    position: fixed;
 }
 
 .second__part_gn {
     width: 80%;
     height: 100%;
     padding: 20px;
+    position: relative;
+    left: 290px;
 }
 
 .menu_item_style {

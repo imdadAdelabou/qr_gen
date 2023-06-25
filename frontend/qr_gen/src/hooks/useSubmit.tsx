@@ -37,6 +37,10 @@ function useSubmit() {
         openToast(APP_MESSAGE.wrongPassword, TypeResponse.ERROR);
       }
 
+      if (error.response && error.response.status == 409) {
+        openToast(APP_MESSAGE.userAlreadyExist, TypeResponse.ERROR);
+      }
+
       if (error.response && error.response.status == 500) {
         openToast(APP_MESSAGE.internalServorError, TypeResponse.ERROR);
       }

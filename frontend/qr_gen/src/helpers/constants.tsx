@@ -21,6 +21,12 @@ export const APP_MESSAGE = {
   internalServorError: "An error occur",
   linkLabel: "Link",
   contactCardQr: "Contact Card",
+  userAlreadyExist: "An account already exist",
+  fileLabel: "File",
+  fileSectionHeader: "Generate a Qr code for a file",
+  linkSectionHeader: "Generate a Qr code for a link",
+  dropImageLabel: "Click or drop your image here",
+  noFileSelected: "No file selected",
 };
 
 export const REGISTER_PATH = "/register";

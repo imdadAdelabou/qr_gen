@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./views/stores/UserContext.tsx";
 import Link from "./views/home/generate/Link.tsx";
 import ContactCard from "./views/home/generate/ContactCard.tsx";
+import UploadFile from "./views/home/generate/UploadFile.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "generate/contact-card",
         element: <ContactCard />,
+      },
+      {
+        path: "generate/upload-file",
+        element: <UploadFile />,
       },
     ],
     errorElement: <ErrorPage />,

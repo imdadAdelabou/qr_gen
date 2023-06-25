@@ -7,25 +7,32 @@ import "../../style/dashboard.css";
 import Link from "./generate/Link";
 import ContactCard from "./generate/ContactCard";
 import AllQr from "./AllQr";
+import UploadFile from "./generate/UploadFile";
 
 const menus: ItemMenuType[] = [
-  {
-    icon: "",
-    label: APP_MESSAGE.allQrCodeLabel,
-    route: "",
-    element: <AllQr />,
-  },
+  // {
+  //   icon: "",
+  //   label: APP_MESSAGE.allQrCodeLabel,
+  //   route: "",
+  //   element: <AllQr />,
+  // },
   {
     icon: "",
     label: APP_MESSAGE.linkLabel,
-    route: "generate/link",
+    route: "/",
     element: <Link />,
   },
+  // {
+  //   icon: "",
+  //   label: APP_MESSAGE.contactLabel,
+  //   route: "generate/contact-card",
+  //   element: <ContactCard />,
+  // },
   {
     icon: "",
-    label: APP_MESSAGE.contactLabel,
-    route: "generate/contact-card",
-    element: <ContactCard />,
+    label: APP_MESSAGE.fileLabel,
+    route: "/generate/upload-file",
+    element: <UploadFile />,
   },
 ];
 

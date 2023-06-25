@@ -35,26 +35,30 @@ function Link() {
   });
 
   return (
-    <div className="link__card">
-      <form method="POST" onSubmit={onSubmit}>
-        <CustomInput
-          props={{
-            placeholder: APP_MESSAGE.enterYourLink,
-            id: "link",
+    <div className="">
+      <h1>{APP_MESSAGE.linkSectionHeader}</h1>
 
-            ...formik.getFieldProps("link"),
-          }}
-          haveError={formik.touched && formik.errors.link ? true : false}
-        ></CustomInput>
-        <div className="spacer"></div>
-        <CustomBtn
-          content={APP_MESSAGE.generateLabel}
-          isLoading={isLoading}
-          disabled={formik.errors.link || isLoading ? true : false}
-          isActive={formik.errors.link || isLoading ? false : true}
-          type="submit"
-        ></CustomBtn>
-      </form>
+      <div className="link__card">
+        <form method="POST" onSubmit={onSubmit}>
+          <CustomInput
+            props={{
+              placeholder: APP_MESSAGE.enterYourLink,
+              id: "link",
+
+              ...formik.getFieldProps("link"),
+            }}
+            haveError={formik.touched && formik.errors.link ? true : false}
+          ></CustomInput>
+          <div className="spacer"></div>
+          <CustomBtn
+            content={APP_MESSAGE.generateLabel}
+            isLoading={isLoading}
+            disabled={formik.errors.link || isLoading ? true : false}
+            isActive={formik.errors.link || isLoading ? false : true}
+            type="submit"
+          ></CustomBtn>
+        </form>
+      </div>
       <div className="spacer"></div>
 
       {qr && <QrDisplay {...qr}></QrDisplay>}

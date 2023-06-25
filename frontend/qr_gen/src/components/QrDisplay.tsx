@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { APP_MESSAGE } from "../helpers/constants";
 import { QrType } from "../helpers/types";
 import "../style/QrDisplay.css";
 import CustomBtn from "./CustomBtn";
+import { downloadQrCode } from "../helpers/functions";
 
 function QrDisplay(qr: QrType) {
+  const [isLoading, setIsLoading] = useState(false);
   console.log(qr.url);
   const rightLabel = (type: string) => {
     switch (type) {
@@ -14,6 +17,12 @@ function QrDisplay(qr: QrType) {
     }
   };
 
+  const action = async () => {
+    setIsLoading(true);
+    await downloadQrCode(qr.url, qr.typeQr);
+    setIsLoading(false);
+  };
+
   return (
     <div className="qr__card">
       <img src={qr.url} className="qr__img" />
@@ -22,8 +31,10 @@ function QrDisplay(qr: QrType) {
       <div className="spacer"></div>
 
       <CustomBtn
-        isActive={true}
+        isActive={!isLoading}
+        isLoading={isLoading}
         content={APP_MESSAGE.downloadLabel}
+        action={action}
       ></CustomBtn>
     </div>
   );

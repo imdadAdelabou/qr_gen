@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import useSubmit from "../../hooks/useSubmit";
 
 function RegisterView() {
   const navigate = useNavigate();
+  const { isLoading, submit } = useSubmit();
 
   const navigateToLogin = () => navigate(LOGIN_PATH);
 
@@ -19,13 +21,17 @@ function RegisterView() {
     formik.handleSubmit(e);
   };
 
+  // const register = (data: unknown) => {};
+
   const formik = useFormik({
     initialValues: {
       username: "",
       email: "",
       password: "",
     },
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      // submit("/api/register", values, register);
+    },
     validationSchema: Yup.object({
       username: Yup.string().min(3).required(),
       email: Yup.string().email().required(),
@@ -87,6 +93,7 @@ function RegisterView() {
                 content={APP_MESSAGE.registerLabel}
                 type="submit"
                 isActive={
+                  isLoading ||
                   formik.errors.email ||
                   formik.errors.password ||
                   formik.errors.username
@@ -94,6 +101,7 @@ function RegisterView() {
                     : true
                 }
                 disabled={
+                  isLoading ||
                   formik.errors.email ||
                   formik.errors.password ||
                   formik.errors.username
