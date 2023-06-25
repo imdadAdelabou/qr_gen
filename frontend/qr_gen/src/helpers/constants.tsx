@@ -27,6 +27,8 @@ export const APP_MESSAGE = {
   linkSectionHeader: "Generate a Qr code for a link",
   dropImageLabel: "Click or drop your image here",
   noFileSelected: "No file selected",
+  accountSuccesfulCreated:
+    "Account created with success. \nYou can now login with your credential",
 };
 
 export const REGISTER_PATH = "/register";

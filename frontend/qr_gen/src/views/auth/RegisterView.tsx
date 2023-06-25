@@ -8,6 +8,8 @@ import { FormEvent } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import useSubmit from "../../hooks/useSubmit";
+import openToast from "../../helpers/functions";
+import { TypeResponse } from "../../helpers/types";
 
 function RegisterView() {
   const navigate = useNavigate();
@@ -21,7 +23,10 @@ function RegisterView() {
     formik.handleSubmit(e);
   };
 
-  // const register = (data: unknown) => {};
+  const register = (data: unknown) => {
+    openToast(APP_MESSAGE.accountSuccesfulCreated, TypeResponse.SUCCESS);
+    navigate(LOGIN_PATH);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +35,7 @@ function RegisterView() {
       password: "",
     },
     onSubmit: async (values) => {
-      // submit("/api/register", values, register);
+      submit("/api/register", values, register);
     },
     validationSchema: Yup.object({
       username: Yup.string().min(3).required(),

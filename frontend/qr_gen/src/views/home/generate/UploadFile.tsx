@@ -5,12 +5,36 @@ import CustomBtn from "../../../components/CustomBtn";
 import "../../../style/FileCmp.css";
 import QrDisplay from "../../../components/QrDisplay";
 import { TypeQr } from "../../../helpers/types";
+import axios from "axios";
 
 function UploadFile() {
+  const [isLoading, setIsLoading] = useState(false);
   const [file, setCurrentFile] = useState<FileList | null>();
+  const formData = new FormData();
 
   function getFile(value: FileList | null) {
     setCurrentFile(value);
+  }
+
+  async function action() {
+    if (file) {
+      setIsLoading(true);
+      formData.append("file", file[0]);
+      try {
+        const result = await axios.post(
+          "http://192.168.43.201:5000/file",
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
+
+        console.log("Result ==> ", result);
+      } catch (e) {
+        console.log("Error =>> ", e);
+      }
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -22,14 +46,11 @@ function UploadFile() {
           {file && file?.length > 0 ? file[0].name : APP_MESSAGE.noFileSelected}
         </h3>
         <CustomBtn
-          isActive={true}
+          isLoading={isLoading}
+          isActive={!isLoading}
           content={APP_MESSAGE.generateLabel}
+          action={action}
         ></CustomBtn>
-        <QrDisplay
-          url="https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png"
-          date={new Date()}
-          typeQr={TypeQr.Link}
-        ></QrDisplay>
       </div>
     </div>
   );

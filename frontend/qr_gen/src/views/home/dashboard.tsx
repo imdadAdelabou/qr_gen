@@ -5,8 +5,6 @@ import { APP_MESSAGE, LOGIN_PATH } from "../../helpers/constants";
 import { UserContext } from "../stores/UserContext";
 import "../../style/dashboard.css";
 import Link from "./generate/Link";
-import ContactCard from "./generate/ContactCard";
-import AllQr from "./AllQr";
 import UploadFile from "./generate/UploadFile";
 
 const menus: ItemMenuType[] = [
