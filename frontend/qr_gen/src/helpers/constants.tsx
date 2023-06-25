@@ -35,3 +35,4 @@ export const REGISTER_PATH = "/register";
 export const LOGIN_PATH = "/login";
 export const PATH_QR_LINK = "/api/generate/qr/link";
 export const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+export const BASE_PYTHON_BACKEND_URL = import.meta.env.VITE_BASE_PYTHON_BACKEND_URL;

@@ -1,15 +1,28 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import FileCmp from "../../../components/FileCmp";
-import { APP_MESSAGE } from "../../../helpers/constants";
+import {
+  APP_MESSAGE,
+  BASE_PYTHON_BACKEND_URL,
+  PATH_QR_LINK,
+} from "../../../helpers/constants";
 import CustomBtn from "../../../components/CustomBtn";
 import "../../../style/FileCmp.css";
 import QrDisplay from "../../../components/QrDisplay";
-import { TypeQr } from "../../../helpers/types";
+import {
+  GenQrResponseType,
+  QrType,
+  ResponseOwType,
+  TypeResponse,
+} from "../../../helpers/types";
 import axios from "axios";
+import useSubmit from "../../../hooks/useSubmit";
+import openToast from "../../../helpers/functions";
 
 function UploadFile() {
   const [isLoading, setIsLoading] = useState(false);
-  const [file, setCurrentFile] = useState<FileList | null>();
+  const [file, setCurrentFile] = useState<FileList | null>(null);
+  const { submit } = useSubmit();
+  const [qrCode, setQrCode] = useState<QrType | null>(null);
   const formData = new FormData();
 
   function getFile(value: FileList | null) {
@@ -20,18 +33,23 @@ function UploadFile() {
     if (file) {
       setIsLoading(true);
       formData.append("file", file[0]);
+
       try {
         const result = await axios.post(
-          "http://192.168.43.201:5000/file",
+          `${BASE_PYTHON_BACKEND_URL}/file`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
-
-        console.log("Result ==> ", result);
+        const ownCloud = result.data as ResponseOwType;
+        submit(PATH_QR_LINK, { link: ownCloud.url }, (data: unknown) => {
+          const encs = data as GenQrResponseType;
+          const result: QrType = encs.data;
+          setQrCode(result);
+        });
       } catch (e) {
-        console.log("Error =>> ", e);
+        openToast(APP_MESSAGE.internalServorError, TypeResponse.ERROR);
       }
       setIsLoading(false);
     }
@@ -51,6 +69,7 @@ function UploadFile() {
           content={APP_MESSAGE.generateLabel}
           action={action}
         ></CustomBtn>
+        {qrCode && <QrDisplay {...qrCode} />}
       </div>
     </div>
   );

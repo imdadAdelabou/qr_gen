@@ -23,7 +23,7 @@ function RegisterView() {
     formik.handleSubmit(e);
   };
 
-  const register = (data: unknown) => {
+  const register = () => {
     openToast(APP_MESSAGE.accountSuccesfulCreated, TypeResponse.SUCCESS);
     navigate(LOGIN_PATH);
   };

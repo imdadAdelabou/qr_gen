@@ -14,7 +14,7 @@ function FileCmp(props: FileType) {
     <div>
       <div className="parent">
         <div className="container__file child">
-          <img src={IllustrationFile} className="" />
+          <img src={IllustrationFile} className="img__file" />
           <h3 className="text">{APP_MESSAGE.dropImageLabel}</h3>
         </div>
         <input

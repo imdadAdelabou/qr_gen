@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-img {
+.img__file {
     display: block;
    margin: 36px auto;
 }
