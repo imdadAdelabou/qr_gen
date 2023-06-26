@@ -15,6 +15,7 @@ import { UserProvider } from "./views/stores/UserContext.tsx";
 import Link from "./views/home/generate/Link.tsx";
 import ContactCard from "./views/home/generate/ContactCard.tsx";
 import UploadFile from "./views/home/generate/UploadFile.tsx";
+import DownloadError from "./components/DowloadError.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
     path: "/verify-email",
     element: <VerificationEmail />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dowload-error",
+    element: <DownloadError />,
   },
 ]);
 

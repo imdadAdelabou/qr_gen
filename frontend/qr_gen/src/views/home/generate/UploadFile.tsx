@@ -46,6 +46,7 @@ function UploadFile() {
         submit(PATH_QR_LINK, { link: ownCloud.url }, (data: unknown) => {
           const encs = data as GenQrResponseType;
           const result: QrType = encs.data;
+          console.log(ownCloud.url);
           setQrCode(result);
         });
       } catch (e) {

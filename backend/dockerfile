@@ -1,0 +1,15 @@
+FROM node:18
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+ENV ADDRESS=192.168.67.74 PORT=3000 SALT=8 TOKEN_SECRET_KEY=qrGenSecret SENDGRID_API_KEY=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 FROM_EMAIL=imdad.tech.web3hub@gmail.com BASE_FRONT_URL=http://localhost:5173
+
+CMD ["npm", "start"]
