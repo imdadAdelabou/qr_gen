@@ -3,29 +3,31 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ItemMenuType, UserContextType } from "../../helpers/types";
 import { APP_MESSAGE, LOGIN_PATH } from "../../helpers/constants";
 import { UserContext } from "../stores/UserContext";
-import "../../style/dashboard.css";
+import "../../style/Dashboard.css";
 import Link from "./generate/Link";
 import UploadFile from "./generate/UploadFile";
+import AllQr from "./AllQr";
+import ContactCard from "./generate/ContactCard";
 
 const menus: ItemMenuType[] = [
-  // {
-  //   icon: "",
-  //   label: APP_MESSAGE.allQrCodeLabel,
-  //   route: "",
-  //   element: <AllQr />,
-  // },
+  {
+    icon: "",
+    label: APP_MESSAGE.allQrCodeLabel,
+    route: "",
+    element: <AllQr />,
+  },
   {
     icon: "",
     label: APP_MESSAGE.linkLabel,
     route: "/",
     element: <Link />,
   },
-  // {
-  //   icon: "",
-  //   label: APP_MESSAGE.contactLabel,
-  //   route: "generate/contact-card",
-  //   element: <ContactCard />,
-  // },
+  {
+    icon: "",
+    label: APP_MESSAGE.contactLabel,
+    route: "generate/contact-card",
+    element: <ContactCard />,
+  },
   {
     icon: "",
     label: APP_MESSAGE.fileLabel,

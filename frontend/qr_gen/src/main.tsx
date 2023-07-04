@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomeView from "./views/home/dashboard.tsx";
+import HomeView from "./views/home/Dashboard.tsx";
 import RegisterView from "./views/auth/RegisterView.tsx";
 import "./index.css";
 import "./App.css";

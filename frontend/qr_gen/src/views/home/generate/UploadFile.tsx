@@ -33,6 +33,7 @@ function UploadFile() {
     if (file) {
       setIsLoading(true);
       formData.append("file", file[0]);
+      formData.append("name", "imdad");
 
       try {
         const result = await axios.post(

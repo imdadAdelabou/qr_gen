@@ -31,6 +31,10 @@ export const APP_MESSAGE = {
     "Account created with success. \nYou can now login with your credential",
   downloadError:
     "Oops. We're sorry, the file could not be downloaded 😢. Try later. Thank you",
+  timeOutErrorMessage:
+    "Oops. It's seems like our server is down. Please, try later",
+  generateToLabel: "Generate the",
+  atLabel: "at",
 };
 
 export const REGISTER_PATH = "/register";

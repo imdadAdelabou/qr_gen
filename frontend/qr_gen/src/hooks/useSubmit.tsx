@@ -27,6 +27,7 @@ function useSubmit() {
 
       if (error.response?.status == 404) {
         openToast(APP_MESSAGE.userDontExist, TypeResponse.ERROR);
+        return;
       }
 
       if (
@@ -35,15 +36,20 @@ function useSubmit() {
         (error.response.data as LoginErrorType).errCode == "wrong-password"
       ) {
         openToast(APP_MESSAGE.wrongPassword, TypeResponse.ERROR);
+        return;
       }
 
       if (error.response && error.response.status == 409) {
         openToast(APP_MESSAGE.userAlreadyExist, TypeResponse.ERROR);
+        return;
       }
 
       if (error.response && error.response.status == 500) {
         openToast(APP_MESSAGE.internalServorError, TypeResponse.ERROR);
+        return;
       }
+
+      openToast(APP_MESSAGE.timeOutErrorMessage, TypeResponse.ERROR);
     } finally {
       setLoading(false);
     }
