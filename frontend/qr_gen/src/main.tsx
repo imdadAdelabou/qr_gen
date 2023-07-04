@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomeView from "./views/home/dashboard.tsx";
+import HomeView from "./views/home/Dashboard.tsx";
 import RegisterView from "./views/auth/RegisterView.tsx";
 import "./index.css";
 import "./App.css";
@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./views/stores/UserContext.tsx";
 import Link from "./views/home/generate/Link.tsx";
 import ContactCard from "./views/home/generate/ContactCard.tsx";
+import UploadFile from "./views/home/generate/UploadFile.tsx";
+import DownloadError from "./components/DowloadError.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "generate/contact-card",
         element: <ContactCard />,
+      },
+      {
+        path: "generate/upload-file",
+        element: <UploadFile />,
       },
     ],
     errorElement: <ErrorPage />,
@@ -45,6 +51,10 @@ export const router = createBrowserRouter([
     path: "/verify-email",
     element: <VerificationEmail />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dowload-error",
+    element: <DownloadError />,
   },
 ]);
 

@@ -1,5 +1,4 @@
 const fastifyPlugin = require("fastify-plugin");
-const sequelizeFastify = require("sequelize-fastify");
 const { Client } = require("fastify-sequelizejs");
 
 async function dbconnector(fastify, opts, done) {
@@ -8,6 +7,7 @@ async function dbconnector(fastify, opts, done) {
     database: "qrGen",
     username: "imdad",
     password: "avatarimdad96",
+    port: 3306,
   });
   done();
 }

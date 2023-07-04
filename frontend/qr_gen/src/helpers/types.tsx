@@ -75,3 +75,8 @@ export interface GenQrResponseType {
   data: QrType;
   message: string;
 }
+
+export interface ResponseOwType {
+  response: boolean;
+  url: string;
+}

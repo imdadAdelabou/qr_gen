@@ -6,15 +6,19 @@
 }
 
 .first__part {
-    width: 20%;
+    width: 250px;
     height: 100%;
     background-color: #4E46B2;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 .second__part_gn {
     width: 80%;
     height: 100%;
     padding: 20px;
+    margin-left: 250px;
 }
 
 .menu_item_style {

@@ -21,9 +21,25 @@ export const APP_MESSAGE = {
   internalServorError: "An error occur",
   linkLabel: "Link",
   contactCardQr: "Contact Card",
+  userAlreadyExist: "An account already exist",
+  fileLabel: "File",
+  fileSectionHeader: "Generate a Qr code for a file",
+  linkSectionHeader: "Generate a Qr code for a link",
+  dropImageLabel: "Click or drop your image here",
+  noFileSelected: "No file selected",
+  accountSuccesfulCreated:
+    "Account created with success. \nYou can now login with your credential",
+  downloadError:
+    "Oops. We're sorry, the file could not be downloaded 😢. Try later. Thank you",
+  timeOutErrorMessage:
+    "Oops. It's seems like our server is down. Please, try later",
+  generateToLabel: "Generate the",
+  atLabel: "at",
 };
 
 export const REGISTER_PATH = "/register";
 export const LOGIN_PATH = "/login";
 export const PATH_QR_LINK = "/api/generate/qr/link";
 export const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+export const BASE_PYTHON_BACKEND_URL = import.meta.env
+  .VITE_BASE_PYTHON_BACKEND_URL;
