@@ -9,11 +9,12 @@ const jwt = require("jsonwebtoken");
 const { sampleTemplate } = require("../template/sendVerifyCode");
 const sendMail = require("./sendgrid");
 const verifyToken = require("../controllers/verifyToken");
-const fastify = require("fastify");
+const qrCodeForContact = require("../controllers/qrcodeForContact");
+const qrCodeForContactSchema = require("../schemas/qrcodeForContact.schema");
 const qr = require("qrcode");
 
 function routes(fastify, opt, done) {
-  const DB = fastify.Sequelize["qrGen"];
+  const DB = fastify.Sequelize[process.env.DB_NAME_DEV];
   DB.DefineModel("Users", {
     username: DB.Schema.STRING,
     email: DB.Schema.STRING,
@@ -136,6 +137,10 @@ function routes(fastify, opt, done) {
       }
     },
   });
+
+  fastify.post("/api/generate/qr/contact", qrCodeForContactSchema, (req, res) =>
+    qrCodeForContact(fastify, Users, req, res)
+  );
 
   done();
 }
