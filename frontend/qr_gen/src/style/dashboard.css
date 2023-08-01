@@ -22,6 +22,7 @@
 }
 
 .menu_item_style {
+    display: block;
     color: white;
     list-style: none;
     text-align: start;
@@ -29,10 +30,13 @@
     cursor: pointer;
     padding: 10px;
     margin: 0 10px 10px 10px;
+    text-decoration: none !important;
+    
 }
 
 .menu_item_style:hover, .item_active {
     background-color: rgba(0,0,0,.5);   
     font-weight: bold;
     border-radius: 8px;
+    color: white;
 }

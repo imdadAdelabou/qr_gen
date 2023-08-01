@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { ItemMenuType, UserContextType } from "../../helpers/types";
 import { APP_MESSAGE, LOGIN_PATH } from "../../helpers/constants";
 import { UserContext } from "../stores/UserContext";
@@ -19,7 +19,7 @@ const menus: ItemMenuType[] = [
   {
     icon: "",
     label: APP_MESSAGE.linkLabel,
-    route: "/",
+    route: "generate/link",
     element: <Link />,
   },
   {
@@ -38,9 +38,6 @@ const menus: ItemMenuType[] = [
 
 function HomeView() {
   const { user } = React.useContext(UserContext) as UserContextType;
-  const navigate = useNavigate();
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [currentElement, setCurrentElement] = React.useState(menus[0].element);
 
   const generateMenu = () => {
     // item_active
@@ -48,19 +45,15 @@ function HomeView() {
       const index = menus.indexOf(menu);
 
       return (
-        <li
-          className={`menu_item_style ${
-            currentIndex == index ? "item_active" : ""
-          }`}
+        <NavLink
+          to={`${menu.route}`}
+          className={({ isActive }) =>
+            `menu_item_style ${isActive ? "item_active" : ""}`
+          }
           key={index}
-          onClick={() => {
-            setCurrentIndex(index);
-            setCurrentElement(menu.element);
-            navigate(menu.route);
-          }}
         >
           {menu.label}
-        </li>
+        </NavLink>
       );
     });
   };
@@ -68,7 +61,9 @@ function HomeView() {
   return user && user?.token ? (
     <div className="main">
       <div className="first__part">{generateMenu()}</div>
-      <div className="second__part_gn">{currentElement}</div>
+      <div className="second__part_gn">
+        <Outlet />
+      </div>
     </div>
   ) : (
     <Navigate replace to={LOGIN_PATH} />

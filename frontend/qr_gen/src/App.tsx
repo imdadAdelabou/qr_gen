@@ -1,7 +1,8 @@
-import LoginView from "./views/auth/LoginView";
+import { RouterProvider } from "react-router-dom";
+import routerApp from "./routerApp";
 
 function App() {
-  return <LoginView />;
+  return <RouterProvider router={routerApp}></RouterProvider>;
 }
 
 export default App;
