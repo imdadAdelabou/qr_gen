@@ -4,9 +4,8 @@ const { Client } = require("fastify-sequelizejs");
 async function dbconnector(fastify, opts, done) {
   await fastify.register(Client, {
     dialect: "mysql",
-    database: "qrGen",
-    username: "imdad",
-    password: "avatarimdad96",
+    database: process.env.DB_NAME_DEV,
+    username: "root",
     port: 3306,
   });
   done();

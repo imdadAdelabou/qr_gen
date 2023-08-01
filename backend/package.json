@@ -13,6 +13,7 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.3.4",
     "qrcode": "^1.5.3",
-    "sequelize-fastify": "^2.0.0"
+    "sequelize-fastify": "^2.0.0",
+    "vcard-generator": "^0.0.7"
   }
 }
