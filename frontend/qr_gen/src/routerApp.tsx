@@ -14,23 +14,6 @@ import {
 import LoginView from "./views/auth/LoginView.tsx";
 import AllQr from "./views/home/AllQr.tsx";
 
-// const tests = [
-//   {
-//     path: "/register",
-//     element: <RegisterView />,
-//     errorElement: <ErrorPage />,
-//   },
-//   {
-//     path: "/verify-email",
-//     element: <VerificationEmail />,
-//     errorElement: <ErrorPage />,
-//   },
-//   {
-//     path: "/dowload-error",
-//     element: <DownloadError />,
-//   },
-// ];
-
 const routerApp = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<HomeView />}>

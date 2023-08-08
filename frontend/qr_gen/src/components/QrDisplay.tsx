@@ -22,24 +22,12 @@ function QrDisplay(qr: QrType) {
     await downloadQrCode(qr.url, qr.typeQr);
     setIsLoading(false);
   };
-  const day = qr.date.getDay();
-  const month = qr.date.getMonth();
-
-  const fillWithZeroInFront = (value: number): string => {
-    return value >= 0 && value <= 9 ? `0${value}` : value.toString();
-  };
 
   return (
     <div className="qr__card">
       <img src={qr.url} className="qr__img" />
       <h3 className="">{qr && qr.typeQr ? rightLabel(qr.typeQr) : ""}</h3>
-      <span className="link">{`${
-        APP_MESSAGE.generateToLabel
-      } ${fillWithZeroInFront(day)}/${fillWithZeroInFront(
-        month
-      )}/${qr.date.getFullYear()} ${APP_MESSAGE.atLabel} ${fillWithZeroInFront(
-        qr.date.getHours()
-      )}:${fillWithZeroInFront(qr.date.getMinutes())}`}</span>
+      <span className="link">{`${APP_MESSAGE.generateToLabel} ${qr.date}}`}</span>
       <div className="spacer"></div>
 
       <CustomBtn

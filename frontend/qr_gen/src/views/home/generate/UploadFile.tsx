@@ -59,7 +59,7 @@ function UploadFile() {
 
   return (
     <div>
-      <h1>{APP_MESSAGE.fileSectionHeader}</h1>
+      <h1 style={{ fontWeight: "bold" }}>{APP_MESSAGE.fileSectionHeader}</h1>
       <FileCmp getFile={getFile} />
       <div className="child3">
         <h3 className="text">
@@ -71,7 +71,12 @@ function UploadFile() {
           content={APP_MESSAGE.generateLabel}
           action={action}
         ></CustomBtn>
-        {qrCode && <QrDisplay {...qrCode} />}
+
+        {qrCode && (
+          <div style={{ width: "30%" }}>
+            <QrDisplay {...qrCode} />{" "}
+          </div>
+        )}
       </div>
     </div>
   );
