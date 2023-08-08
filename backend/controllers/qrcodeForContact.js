@@ -6,8 +6,8 @@ async function qrCodeForContact(fastify, user, req, res) {
     const { firstName, lastName, cellPhone, email } = req.body;
     const vcard = vCard.generate({
       name: {
-        familyName: lastName,
-        givenName: firstName,
+        familyName: lastName[0].toUpperCase() + lastName.slice(1),
+        givenName: firstName[0].toUpperCase() + firstName.slice(1),
       },
       emails: [{ text: email }],
       phones: [

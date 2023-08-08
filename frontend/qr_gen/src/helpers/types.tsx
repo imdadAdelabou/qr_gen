@@ -80,3 +80,8 @@ export interface ResponseOwType {
   response: boolean;
   url: string;
 }
+
+export interface QrTypeContact {
+  message: string;
+  data: QrType;
+}

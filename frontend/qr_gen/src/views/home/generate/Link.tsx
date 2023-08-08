@@ -36,7 +36,7 @@ function Link() {
 
   return (
     <div className="">
-      <h1>{APP_MESSAGE.linkSectionHeader}</h1>
+      <h1 style={{ fontWeight: "bold" }}>{APP_MESSAGE.linkSectionHeader}</h1>
 
       <div className="link__card">
         <form method="POST" onSubmit={onSubmit}>
@@ -60,8 +60,11 @@ function Link() {
         </form>
       </div>
       <div className="spacer"></div>
-
-      {qr && <QrDisplay {...qr}></QrDisplay>}
+      {qr && (
+        <div style={{ width: "30%" }}>
+          <QrDisplay {...qr} />
+        </div>
+      )}
     </div>
   );
 }

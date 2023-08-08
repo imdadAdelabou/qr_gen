@@ -8,3 +8,8 @@
 * {
   box-sizing: border-box;
 }
+
+.PhoneInputInput {
+  outline: none;
+  border: none;
+}
