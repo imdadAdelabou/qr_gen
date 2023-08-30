@@ -9,6 +9,8 @@ import UploadFile from "./generate/UploadFile";
 import AllQr from "./AllQr";
 import ContactCard from "./generate/ContactCard";
 import Logout from "../../components/Logout";
+import CustomModal from "../../components/CustomModal";
+import ValidateOrNotLogout from "../../components/ValidateOrNotLogout";
 
 const menus: ItemMenuType[] = [
   {
@@ -38,7 +40,8 @@ const menus: ItemMenuType[] = [
 ];
 
 function HomeView() {
-  const { user } = React.useContext(UserContext) as UserContextType;
+  const [modalState, setModalState] = React.useState(false);
+  const { user, updateUser } = React.useContext(UserContext) as UserContextType;
 
   const generateMenu = () => {
     // item_active
@@ -60,17 +63,33 @@ function HomeView() {
   };
 
   return user && user?.token ? (
-    <div className="main">
-      <div className="first__part">
-        {generateMenu()}
-        <div className="bottom">
-          <Logout />
+    <div>
+      <div className="main">
+        <div className="first__part">
+          {generateMenu()}
+          <div className="bottom">
+            <Logout action={() => setModalState(true)}></Logout>
+          </div>
+        </div>
+
+        <div className="second__part_gn">
+          <Outlet />
         </div>
       </div>
 
-      <div className="second__part_gn">
-        <Outlet />
-      </div>
+      <CustomModal
+        show={modalState}
+        title={APP_MESSAGE.reallyWantToLogout}
+        children={
+          <ValidateOrNotLogout
+            cancelAction={() => setModalState(false)}
+            logout={() => {
+              setModalState(false);
+              updateUser({ username: "", token: "", id: null });
+            }}
+          />
+        }
+      ></CustomModal>
     </div>
   ) : (
     <Navigate replace to={LOGIN_PATH} />

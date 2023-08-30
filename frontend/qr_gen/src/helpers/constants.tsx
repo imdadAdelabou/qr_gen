@@ -41,7 +41,10 @@ export const APP_MESSAGE = {
     "Oops. It's seems like our server is down. Please, try later",
   generateToLabel: "Generate the",
   atLabel: "at",
-  logoutLabel: "Logout",
+  logoutLabel: "Log Out",
+  reallyWantToLogout: "Do you really want to log Out?",
+  cancelLabel: "Cancel",
+  logOutLabel: "Log Out",
 };
 
 export const REGISTER_PATH = "/register";

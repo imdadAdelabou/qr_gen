@@ -13,6 +13,7 @@ export interface BtnType {
   type?: "button" | "submit";
   disabled?: boolean;
   isLoading?: boolean;
+  style?: React.CSSProperties;
 }
 
 export enum HTTPRequest {
@@ -84,4 +85,13 @@ export interface ResponseOwType {
 export interface QrTypeContact {
   message: string;
   data: QrType;
+}
+
+export interface LogOutType {
+  action: () => void;
+}
+
+export interface ValidateOrNotLogoutType {
+  cancelAction: () => void;
+  logout: () => void;
 }
