@@ -8,6 +8,7 @@ import Link from "./generate/Link";
 import UploadFile from "./generate/UploadFile";
 import AllQr from "./AllQr";
 import ContactCard from "./generate/ContactCard";
+import Logout from "../../components/Logout";
 
 const menus: ItemMenuType[] = [
   {
@@ -60,7 +61,13 @@ function HomeView() {
 
   return user && user?.token ? (
     <div className="main">
-      <div className="first__part">{generateMenu()}</div>
+      <div className="first__part">
+        {generateMenu()}
+        <div className="bottom">
+          <Logout />
+        </div>
+      </div>
+
       <div className="second__part_gn">
         <Outlet />
       </div>

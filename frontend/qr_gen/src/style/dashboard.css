@@ -12,6 +12,17 @@
     position: fixed;
     left: 0;
     top: 0;
+   
+}
+
+.bottom {
+    width: 90%;
+    bottom: 0;
+    position: absolute;
+    margin: 0 10px 10px 10px;
+    background-color: rgba(0,0,0,.2);
+    padding: 7px;
+    border-radius: 8px;
 }
 
 .second__part_gn {
