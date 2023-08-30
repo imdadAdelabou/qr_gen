@@ -2,6 +2,7 @@ import { useState } from "react";
 import FileCmp from "../../../components/FileCmp";
 import {
   APP_MESSAGE,
+  BASE_API_URL,
   BASE_PYTHON_BACKEND_URL,
   PATH_QR_LINK,
 } from "../../../helpers/constants";
@@ -37,19 +38,13 @@ function UploadFile() {
 
       try {
         const result = await axios.post(
-          `${BASE_PYTHON_BACKEND_URL}/file`,
+          `${BASE_API_URL}/api/generate/qr/file`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
-        const ownCloud = result.data as ResponseOwType;
-        submit(PATH_QR_LINK, { link: ownCloud.url }, (data: unknown) => {
-          const encs = data as GenQrResponseType;
-          const result: QrType = encs.data;
-          console.log(ownCloud.url);
-          setQrCode(result);
-        });
+        console.log(result, "=<<< Result");
       } catch (e) {
         openToast(APP_MESSAGE.internalServorError, TypeResponse.ERROR);
       }

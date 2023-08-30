@@ -9,6 +9,7 @@ function CustomBtn(props: BtnType) {
       type={props.type || "button"}
       onClick={props.action}
       disabled={props.disabled}
+      style={props.style}
     >
       {props.isLoading ? <Spinner /> : props.content}
     </button>
