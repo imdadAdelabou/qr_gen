@@ -10,7 +10,9 @@ const { sampleTemplate } = require("../template/sendVerifyCode");
 const sendMail = require("./sendgrid");
 const verifyToken = require("../controllers/verifyToken");
 const qrCodeForContact = require("../controllers/qrcodeForContact");
+const qrCodeForFileCtrl = require("../controllers/qrcodeForFile");
 const qrCodeForContactSchema = require("../schemas/qrcodeForContact.schema");
+const qrCodeForFileSchema = require("../schemas/qrcodeForFile.schema");
 const qr = require("qrcode");
 
 function routes(fastify, opt, done) {
@@ -137,6 +139,10 @@ function routes(fastify, opt, done) {
       }
     },
   });
+
+  fastify.post("/api/generate/qr/file", qrCodeForFileSchema, async (req, res) =>
+    qrCodeForFileCtrl(req, res)
+  );
 
   fastify.post("/api/generate/qr/contact", qrCodeForContactSchema, (req, res) =>
     qrCodeForContact(fastify, Users, req, res)
